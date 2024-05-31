@@ -31,6 +31,8 @@ github_username:  n1uf
 theme: minima
 plugins:
   - jekyll-feed
+plugins:
+  - jekyll-include-cache
 markdown: GFM
 
 # Exclude from processing.
