@@ -33,7 +33,8 @@ plugins:
   - jekyll-feed
 plugins:
   - jekyll-include-cache
-markdown: GFM
+markdown: kramdown
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
