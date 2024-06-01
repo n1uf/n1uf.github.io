@@ -5,6 +5,7 @@ date:   2024-06-01 00:30:00 +0800
 latex: true
 categories: Latex Formula
 ---
+{% raw %}
 
 我这里为post格式的layout添加了专属于post的`head`和`default`，命名为`headpo.html`和`defaultpo.html`，分别放在`_layouts`和`_includes`目录下。
 
@@ -18,7 +19,7 @@ categories: Latex Formula
 {% endif %}
 ```
 
-在`defaultpo.html`内的`%- include header.html -%`下面添加如下代码：
+在`defaultpo.html`内的`{%- include header.html -%}`下面添加如下代码：
 
 ```html
 <!--ture then show latex Formula-->
@@ -29,7 +30,7 @@ categories: Latex Formula
 {% endif %}
 ```
 
-*注意在`defaultpo.html`中，`%- include head.html -%`改为`%- include headpo.html -%`。*
+*注意在`defaultpo.html`中，`{%- include head.html -%}`改为`{%- include headpo.html -%}`。*
 
 此时，`_posts`内创建的post文件可以在页头添加`latex: true`来启用Latex公式支持。
 
@@ -183,3 +184,6 @@ $$
 2. 将每个点分配到最近的质心的过程中，不会增加目标函数的值；在重新计算每个聚类的质心时，由均值性质可知，也不会增加目标函数的值。因此在$K-means$算法过程中每次迭代，目标函数$J$非增。
 
 3. 由于目标函数$J$非负，且在每次迭代中非增，则必须在某个点收敛。
+
+
+{% endraw %}
