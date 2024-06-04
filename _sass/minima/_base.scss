@@ -151,11 +151,12 @@ code {
   @include relative-font-size(0.9375);
   border: 1px solid $grey-color-light;
   border-radius: 3px;
-  background-color: #eef;
+  background-color: rgb(236, 236, 236);
 }
 
 code {
   padding: 1px 5px;
+  font-family:'Lucida Console', Monaco, monospace;
 }
 
 pre {
