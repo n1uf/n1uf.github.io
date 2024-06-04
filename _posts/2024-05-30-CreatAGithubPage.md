@@ -12,15 +12,15 @@ categories: Jekyll GitHub Windows
 
 1. 首先Create一个new repository，name一栏设置为`username.github.io`，这里的`username`为你的GitHub用户名，不用勾选Add a README file。
 
-   ![](https://github.com/n1uf/n1uf.github.io/raw/master/img/3_1.png)
+   ![]({{"assets/img/3_1.png" | absolute_url}})
 
-   ![](https://github.com/n1uf/n1uf.github.io/raw/master/img/3_2.png)
+   ![]({{"assets/img/3_2.png" | absolute_url}})
 
    我这里错误是因为我已经创建了以该名字为名字的仓库。
 
 2. 在创建好的仓库的选项栏，选择Settings（如果没有就是隐藏在`...`中了），在左边栏目中找到Pages，设置为如下：
 
-   ![](https://github.com/n1uf/n1uf.github.io/raw/master/img/3_3.png)
+   ![]({{"assets/img/3_3.png" | absolute_url}})
 
    注意这里主分支可能是`main`，第一次尝试创建建议和我一样即可（选择`/(root)`，不用`/docs`）。然后`Save`一下。
 
@@ -28,7 +28,7 @@ categories: Jekyll GitHub Windows
 
    * 在[GitHub Desktop](https://desktop.github.com/)上下载专用与GitHub的git工具。下载安装好后，从左上角`clone`你刚刚在`GitHub`上创建的仓库到本地。
 
-     ![](https://github.com/n1uf/n1uf.github.io/raw/master/img/3_4.png)
+     ![]({{"assets/img/3_4.png" | absolute_url}})
 
      这里`n1uf.github.io`是我已经克隆好的仓库。
 

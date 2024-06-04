@@ -6,6 +6,10 @@ categories: Function
 top: true
 ---
 
+{%raw%}
+* Post内引用图片：`![]({{"assets/img/1.png" | absolute_url}})`，图片路径为`assets/img`或者自己设置一个图片路径。
+{%endraw%}
+
 * [置顶功能加入](https://n1uf.github.io/topfunction/2024/06/01/TopFunction.html)
 
 * [公式块正确显示](https://n1uf.github.io/latex/formula/2024/05/31/LatexFormulaDisplay.html)
