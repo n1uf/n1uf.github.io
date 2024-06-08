@@ -44,7 +44,7 @@ markdown: kramdown
 timezone: Asia/Shanghai
 
 # google analytics回调函数的user id
-google_analytics: n1uf
+google_analytics: G-BVNPY43E9H
 
 # Exclude from processing.
 # The following items will not be processed, by default.
