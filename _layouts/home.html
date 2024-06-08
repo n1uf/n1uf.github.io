@@ -18,7 +18,7 @@ layout: default
         {%-if post.top == true -%}
           <strong class="post-meta">置顶<br /></strong>
 
-          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+          {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
           <span class="post-meta">{{ post.date | date: date_format }}</span>
           <h3>
             <a class="post-link" href="{{ post.url | relative_url }}">
@@ -36,7 +36,7 @@ layout: default
       <li>
         <!--没有置顶标签的文章后续输出即可-->
         {%-if post.top != true -%}
-          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+          {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
           <span class="post-meta">{{ post.date | date: date_format }}</span>
           <h3>
             <a class="post-link" href="{{ post.url | relative_url }}">
