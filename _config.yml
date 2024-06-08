@@ -21,7 +21,7 @@
 title: niuf的主页
 email: 2318607163@qq.com
 description: >- # this means to ignore newlines until "baseurl:"
-  基于github的个人主页
+  niuf的基于github-page的个人主页
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: niuqingyuan1
