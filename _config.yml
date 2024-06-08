@@ -35,8 +35,16 @@ plugins:
   - jekyll-feed
 plugins:
   - jekyll-include-cache
+plugins:
+  - jekyll-seo-tag
+
 markdown: kramdown
 
+# add a timezone
+timezone: Asia/Shanghai
+
+# google analytics回调函数的user id
+google_analytics: n1uf
 
 # Exclude from processing.
 # The following items will not be processed, by default.
