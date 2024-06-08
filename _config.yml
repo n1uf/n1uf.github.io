@@ -37,6 +37,9 @@ plugins:
   - jekyll-include-cache
 plugins:
   - jekyll-seo-tag
+plugins:
+  - jekyll-last-modified-at
+
 
 markdown: kramdown
 
