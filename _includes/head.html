@@ -1,12 +1,6 @@
 <head>
     <!--add a ico-->
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
-    
-    <!--add support for latex formula-->
-    {% if page.latex == true %}
-     <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML">
-     </script>
-    {% endif %}
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +11,9 @@
     {%- if jekyll.environment == 'production' and site.google_analytics -%}
       {%- include google-analytics.html -%}
     {%- endif -%}
+
+    <!--add support for latex formula-->
+    {% include katex.html %}
 
     <!--SEO-->
     {% seo %}
