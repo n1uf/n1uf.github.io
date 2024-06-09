@@ -37,7 +37,7 @@ top: true
 
 * 网站流量分析：
   1. （访问者需要能访问国外网站）Google-Anayltics：先在[这里](https://analytics.google.com/analytics/web/?authuser=0#/provision/SignUp/)注册一下，这里minima已经有对应模版`google-analytics.html`（可以在minima原始库中找到），只需要编辑自己的`_config.yml`，加入`google_analytics: <你在网站上生成的衡量ID>`，install一下即可。
-  2. （国内自己的免费流量分析）点击[这里](51.la)进入，类似上面的方法注册后，根据网站给出的代码，插入到自己的`</head>`前即可。
+  2. （国内自己的免费流量分析`51.la`）点击[这里](51.la)进入，类似上面的方法注册后，根据网站给出的代码，插入到自己的`</head>`前即可。
 
 {%raw%}
 * 站内引用：`[<外显名字>]({% post_url <你需要引用的post名（不用后缀）> %})`
@@ -51,8 +51,17 @@ top: true
   * "%B %d, %Y" -> June 08, 2024
   * "%d %B %Y" -> 08 June 2024
   * "%b %d, %Y" -> Jun 08, 2024
+
+* 最后修改时间：
   
-  ---
-  *last updated 2024/06/09 0:35*
-  
-  Last updated: {{ page.last-modified-at | date: "%Y-%m-%d %H:%M:%S" }}
+  参考[这里](https://github.com/gjtorikian/jekyll-last-modified-at)修改`Gemfile`等并`install`，添加参考代码到合适的位置，我这里添加到`_includes/footer.html`中，并对生成内容进行了分类：
+  {%raw%}
+  ```html
+  {%- if page.layout == "post" -%}
+    <p>Post Last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
+  {%- else if page.layout == "home" -%}
+    <p>Site Last updated at {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
+  {%- endif -%}
+  ```
+  {%endraw%}
+  若当前页面是`post`，显示最后更新时间；若当前页面是`home`，则显示整个网站的上传时间。

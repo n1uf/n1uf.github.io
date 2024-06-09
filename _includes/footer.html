@@ -14,11 +14,14 @@
             {%- else -%}
               {{ site.title | escape }}
             {%- endif -%}
-            <p>Last updated: {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
-            </li>
-            {%- if site.email -%}
-            <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+
+            {%- if page.layout == "post" -%}
+              <p>Post last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
+            {%- else if page.layout == "home" -%}
+              <p>Site last updated at {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
             {%- endif -%}
+
+            </li>
         </ul>
       </div>
 

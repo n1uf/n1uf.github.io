@@ -43,5 +43,6 @@ gem "minimal-mistakes-jekyll"
 # SEO
 gem 'jekyll-seo-tag'
 
-# last-modified-at
-gem 'jekyll-last-modified-at'
+group :jekyll_plugins do
+  gem "jekyll-last-modified-at"
+end
