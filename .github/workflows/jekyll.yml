@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -23,8 +23,19 @@ jobs:
     - name: Build site
       run: bundle exec jekyll build
 
+    - name: Configure git
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
+
+    - name: Check git status
+      run: git status
+
+    - name: Show git remote
+      run: git remote -v
