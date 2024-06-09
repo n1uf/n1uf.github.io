@@ -9,7 +9,7 @@ categories: Latex Formula
 
 我这里为post格式的layout添加了专属于post的`head`和`default`，命名为`headpo.html`和`defaultpo.html`，分别放在`_layouts`和`_includes`目录下。
 
-在`headpo.html`内添加如下代码：
+在`head.html`内添加如下代码：
 
 ```html
 <!--add support for latex formula-->
@@ -19,7 +19,7 @@ categories: Latex Formula
 {% endif %}
 ```
 
-在`defaultpo.html`内的`{%- include header.html -%}`下面添加如下代码：
+在`default.html`内的`{%- include header.html -%}`下面添加如下代码：
 
 ```html
 <!--ture then show latex Formula-->
@@ -30,9 +30,7 @@ categories: Latex Formula
 {% endif %}
 ```
 
-*注意在`defaultpo.html`中，`{%- include head.html -%}`改为`{%- include headpo.html -%}`。*
-
-此时，`_posts`内创建的post文件可以在页头添加`latex: true`来启用Latex公式支持。
+此时，可以在页头添加`latex: true`来启用Latex公式支持。
 
 ***以下为包含了很多公式（包括行内公式）插入的文章示例***
 
