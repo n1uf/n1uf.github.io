@@ -53,7 +53,7 @@ jobs:
         run: gem install bundler
     
       - name: Install dependencies
-        run: bundle install --path vendor/bundle
+        run: bundle install bundle config set path 'vendor/bundle'
       
       - name: Setup Pages
         id: pages
