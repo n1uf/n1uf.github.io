@@ -9,6 +9,7 @@ Test `Jekyll-last-modified-at` 插件
 Post last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}
 
 ---
+{%raw%}
 
 # 正文部分
 
@@ -63,6 +64,8 @@ Post last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}
         with:
           fetch-depth: 0  # Ensure the entire history is fetched for `jekyll-last-modified-at`
    ```
-   
+
    这里设置了`fetch-depth`为`0`，保证每一次提交历史都被遍历，这样就可以正确更新`last-modified-at`了。
 6. 经过验证，插件生效且正确。
+
+{%endraw%}
