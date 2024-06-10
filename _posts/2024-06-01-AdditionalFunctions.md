@@ -65,3 +65,7 @@ top: true
   ```
   {%endraw%}
   若当前页面是`post`，显示最后更新时间；若当前页面是`home`，则显示整个网站的上传时间。
+
+  具体在github-page上实现插件的正常运行，必须创建自己的action流才行。这一部分内容写在下面的这个文章内：
+  
+  [创建Action流以实现githubPage上插件的正常运行]({% post_url 2024-06-09-TestLastModified %})
