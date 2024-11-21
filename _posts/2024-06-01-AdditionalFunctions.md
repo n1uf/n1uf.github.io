@@ -52,15 +52,17 @@ top: true
   * "%d %B %Y" -> 08 June 2024
   * "%b %d, %Y" -> Jun 08, 2024
 
-* 最后修改时间：
+* 最后修改时间插件：
   
-  参考[这里](https://github.com/gjtorikian/jekyll-last-modified-at)修改`Gemfile`等并`install`，添加参考代码到合适的位置，我这里添加到`_includes/footer.html`中，并对生成内容进行了分类：
   {%raw%}
+  参考[这里](https://github.com/gjtorikian/jekyll-last-modified-at)修改`Gemfile`等并`install`，添加参考代码到合适的位置，我在`_includes`目录下创建了`update_time.html`，并将其以`{%- include update_time.html -%}`的方式引用在了`footer.html`和`default.html`的合适位置。并对生成的内容进行了分类：
   ```html
   {%- if page.layout == "post" -%}
-    <p>Post Last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
+    <p style="color: gray; font-size: small;">Post last updated at <br> 
+        {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
   {%- else if page.layout == "home" -%}
-    <p>Site Last updated at {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
+    <p style="color: gray; font-size: small;">Site last updated at <br> 
+        {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
   {%- endif -%}
   ```
   {%endraw%}
