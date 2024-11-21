@@ -1,0 +1,7 @@
+{%- if page.layout == "post" -%}
+    <p style="color: gray; font-size: small;">Post last updated at <br> 
+        {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
+{%- else if page.layout == "home" -%}
+    <p style="color: gray; font-size: small;">Site last updated at <br> 
+        {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
+{%- endif -%}

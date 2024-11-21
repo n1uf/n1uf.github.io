@@ -15,11 +15,7 @@
               {{ site.title | escape }}
             {%- endif -%}
 
-            {%- if page.layout == "post" -%}
-              <p>Post last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
-            {%- else if page.layout == "home" -%}
-              <p>Site last updated at {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
-            {%- endif -%}
+            {%- include update_time.html -%}            
 
             </li>
         </ul>
