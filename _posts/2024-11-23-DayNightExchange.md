@@ -6,6 +6,7 @@ categories: function
 ---
 
 源码详见`_sass\_daynight.scss`，`_includes\header.html`，`assets\main.scss`。
+仓库地址：[n1uf的github](https://github.com/n1uf/n1uf.github.io)
 
 功能实现：
 
