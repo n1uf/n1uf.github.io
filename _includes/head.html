@@ -24,4 +24,19 @@
 
     <!--百度站长验证-->
     <meta name="baidu-site-verification" content="codeva-6Jz1p5790h" />
+
+    <style>
+      body { visibility: hidden; }
+      
+    </style>
+
+    <script>
+      (function() {
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'night') {
+          document.documentElement.classList.add('night-mode'); 
+        }
+      })();
+    </script>
+    
 </head>

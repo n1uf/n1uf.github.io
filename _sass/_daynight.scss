@@ -154,6 +154,11 @@ body {
     }
   }
   
+  // 为页面加载前默认添加无动画样式
+  html.night-mode body {
+    transition: none; // 避免加载时初始闪烁
+  }
+
   .theme-toggle {
     display: inline-block;
     margin-left: 20px;
