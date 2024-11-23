@@ -1,0 +1,146 @@
+// 日夜间模式切换样式
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.night-mode {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    
+    .site-header {
+      border-top-color: #555;
+      border-bottom-color: #333;
+    }
+    
+    .site-title,
+    .site-title:visited {
+      color: #ffffff;
+    }
+    
+    .site-nav .page-link {
+      color: #ffffff;
+    }
+    
+    .post-link {
+      color: #ffffff;
+    }
+    
+    .post-meta {
+      color: #aaa;
+    }
+
+    // 代码块夜间模式样式（!important 覆盖原有高光样式）
+    div.highlight,
+    figure.highlight,
+    .highlight {
+      background: #1a1a1a !important;
+
+      pre.highlight,
+      code {
+        background: #1a1a1a !important;
+      }
+    
+      .highlighter-rouge & {
+        background: #2d2d2d !important;
+      }
+
+      // 代码高亮颜色适配
+      .c, .cm, .c1     { color: #75715e !important; } // Comments
+      .err   { color: #960050 !important; background-color: #1e0010 !important; }
+      .k     { color: #66d9ef !important; }
+      .o     { color: #f92672 !important; }
+      .p     { color: #f8f8f2 !important; }
+      .cp    { color: #75715e !important; }
+      .cs    { color: #75715e !important; }
+      .gd    { color: #f92672 !important; }
+      .ge    { font-style: italic; }
+      .gi    { color: #a6e22e !important; }
+      .gs    { font-weight: bold; }
+      .gu    { color: #75715e !important; }
+      .kc    { color: #66d9ef !important; }
+      .kd    { color: #66d9ef !important; }
+      .kn    { color: #f92672 !important; }
+      .kp    { color: #66d9ef !important; }
+      .kr    { color: #66d9ef !important; }
+      .kt    { color: #66d9ef !important; }
+      .m     { color: #ae81ff !important; }
+      .s     { color: #e6db74 !important; }
+      .na    { color: #a6e22e !important; }
+      .nb    { color: #66d9ef !important; }
+      .nc    { color: #a6e22e !important; }
+      .no    { color: #66d9ef !important; }
+      .nd    { color: #a6e22e !important; }
+      .ni    { color: #f8f8f2 !important; }
+      .ne    { color: #a6e22e !important; }
+      .nf    { color: #a6e22e !important; }
+      .nl    { color: #f8f8f2 !important; }
+      .nn    { color: #f8f8f2 !important; }
+      .nx    { color: #a6e22e !important; }
+      .py    { color: #f8f8f2 !important; }
+      .nt    { color: #f92672 !important; }
+      .nv    { color: #f8f8f2 !important; }
+      .w     { color: #f8f8f2 !important; }
+      .mf    { color: #ae81ff !important; }
+      .mh    { color: #ae81ff !important; }
+      .mi    { color: #ae81ff !important; }
+      .mo    { color: #ae81ff !important; }
+      .sb    { color: #e6db74 !important; }
+      .sc    { color: #e6db74 !important; }
+      .sd    { color: #e6db74 !important; }
+      .s2    { color: #e6db74 !important; }
+      .se    { color: #ae81ff !important; }
+      .sh    { color: #e6db74 !important; }
+      .si    { color: #e6db74 !important; }
+      .sx    { color: #e6db74 !important; }
+      .sr    { color: #e6db74 !important; }
+      .s1    { color: #e6db74 !important; }
+      .ss    { color: #e6db74 !important; }
+      .bp    { color: #f8f8f2 !important; }
+      .vc    { color: #f8f8f2 !important; }
+      .vg    { color: #f8f8f2 !important; }
+      .vi    { color: #f8f8f2 !important; }
+      .il    { color: #ae81ff !important; }
+    }
+
+    // 行内代码样式
+    code.highlighter-rouge {
+    background-color: #2d2d2d !important;
+    color: #f8f8f2 !important;
+    }
+
+    // 添加对 pre 标签的样式
+    pre {
+      background-color: #1a1a1a !important;
+    
+      > code {
+        background-color: transparent !important;
+      }
+    }
+  }
+  
+  .theme-toggle {
+    display: inline-block;
+    margin-left: 20px;
+    
+    button {
+      padding: 8px 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+  
+  @include media-query($on-palm) {
+    .theme-toggle {
+      display: block;
+      margin: 10px 20px;
+    }
+  }

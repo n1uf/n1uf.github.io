@@ -6,6 +6,10 @@ categories: Function
 top: true
 ---
 
+* minima默认配置：使用`bundle show minima`找到位置，需要修改的文件复制到自己的项目文件夹相同位置即可。
+
+* 本地调试：`bundle exec jekyll serve`。
+
 {%raw%}
 * Post内引用图片：`![]({{"assets/img/1.png" | absolute_url}})`，图片路径为`assets/img`或者自己设置一个图片路径。
 {%endraw%}
@@ -71,3 +75,5 @@ top: true
   具体在github-page上实现插件的正常运行，必须创建自己的action流才行。这一部分内容写在下面的这个文章内：
   
   [创建Action流以实现githubPage上插件的正常运行]({% post_url 2024-06-09-TestLastModified %})
+
+* [日夜间模式切换功能]({% post_url 2024-11-23-DayNightExchange %})
