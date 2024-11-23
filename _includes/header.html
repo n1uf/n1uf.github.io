@@ -50,6 +50,11 @@
       toggleButton.textContent = "切换到日间模式";
     }
 
+    // 页面加载后添加 transition 类，恢复过渡动画
+    setTimeout(() => {
+      body.classList.add('transition-enabled');
+    }, 100); // 延迟避免初始加载的过渡
+
     // 切换按钮点击事件
     toggleButton.addEventListener("click", () => {
       if (body.classList.toggle("night-mode")) {
