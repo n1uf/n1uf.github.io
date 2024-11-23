@@ -29,6 +29,42 @@ body {
       color: #aaa;
     }
 
+
+    // 1. 默认链接颜色
+  a {
+    color: #66d9ef; // 修改为适合夜间模式的颜色
+    text-decoration: none; // 如果不需要下划线
+  }
+
+  // 2. 鼠标悬停时的颜色
+  a:hover {
+    color: #a6e22e; // 选一个与夜间模式背景形成对比的高亮颜色
+    text-decoration: underline; // 可选：在悬停时加下划线
+  }
+
+  // 3. 已访问过的链接样式
+  a:visited {
+    color: #8c9eff; // 自定义已访问过链接的颜色
+  }
+
+  // 4. 活动状态链接样式
+  a:active {
+    color: #ff79c6; // 点击时的颜色
+  }
+
+  // 特殊类链接
+  .site-title a,
+  .post-link,
+  .page-link {
+    color: #ffffff !important; // 让标题类链接更加明显
+  }
+  
+  .site-title a:hover,
+  .post-link:hover,
+  .page-link:hover {
+    color: #ffb86c !important; // 悬停颜色
+  }
+
     // 代码块夜间模式样式（!important 覆盖原有高光样式）
     div.highlight,
     figure.highlight,
