@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Minima主体自定义指南"
+title:  "Minima主题自定义指南"
 date:   2024-06-01 20:01:00 +0800
 categories: Function
 top: true
