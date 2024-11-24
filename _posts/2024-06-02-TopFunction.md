@@ -2,7 +2,7 @@
 layout: post
 title:  "置顶功能加入"
 date:   2024-06-02 00:45:00 +0800
-categories: TopFunction
+categories: function
 ---
 {% raw %}
 

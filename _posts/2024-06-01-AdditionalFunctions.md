@@ -2,7 +2,7 @@
 layout: post
 title:  "Minima主题自定义指南"
 date:   2024-06-01 20:01:00 +0800
-categories: Function
+categories: function
 top: true
 ---
 
@@ -22,7 +22,7 @@ top: true
 * 实现`liquid`代码的正确引用：
   
   通过在`post`类型的`markdown`文件有关`liquid`代码引用内容的开头和结尾加入`{% raw %}`和`endraw`标记**（可恶这里被识别为`liquid`语言了！！！，只能不加`{% %}`展示了）**。
-{% endraw %}
+  {% endraw %}
 
 * [页脚添加Bilibili账户]({% post_url 2024-06-02-SocialAdd %})
 
