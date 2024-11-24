@@ -4,6 +4,9 @@ title:  "创建Action流以实现githubPage上插件的正常运行"
 date:   2024-06-09 14:07:00 +0800
 categories: last-modified
 ---
+
+*摘要：实现插件在GithubPage上的正常部署。*
+
 Test `Jekyll-last-modified-at` 插件
 
 Post last updated at {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}

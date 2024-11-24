@@ -5,6 +5,8 @@ date:   2024-11-23 11:35:00 +0800
 categories: function
 ---
 
+*摘要：实现日夜间模式切换功能。*
+
 源码详见`_sass\_daynight.scss`，`assets\main.scss`，`_includes\header.html`，`_includes\head.html`，`_includes\daynight.html`。
 
 仓库地址：[n1uf的github](https://github.com/n1uf/n1uf.github.io)

@@ -5,6 +5,8 @@ date: 2024-11-24
 categories: test
 ---
 
+*摘要：一个Markdown示例文件用于测试。*
+
 # 这是一个一级标题
 
 欢迎来到这篇文章！这是一个简单的 Markdown 示例文件，展示了常见的 Markdown 语法。

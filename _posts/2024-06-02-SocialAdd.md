@@ -4,12 +4,15 @@ title:  "在页脚第二栏添加了Bilibili入口"
 date:   2024-06-02 19:30:00 +0800
 categories: Footer Bilibili
 ---
-{% raw %}
+
+*摘要：在页脚添加了个人Bilibili账号的入口。*
+
 1. 在`_config.yml`的`github_username`附近添加两行:
     ```yml
     bilibili_bid: 398068101
     bilibili_username: 路人_牛
     ```
+{% raw %}
 2. 复制`minima`默认文件`social.html`到`_includes`目录下，添加对`bilibili`的支持：
    ```html
    {%- if site.bilibili_bid -%}<li><a href="https://space.bilibili.com/{{ site.bilibili_bid }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#bilibili' }}"></use></svg><span class="username">{{ site.bilibili_username }}</span></a></li>{%- endif -%}

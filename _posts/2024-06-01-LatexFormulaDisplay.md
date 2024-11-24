@@ -5,9 +5,12 @@ date:   2024-06-01 00:30:00 +0800
 latex: true
 categories: Latex Formula
 ---
-{% raw %}
+
+*摘要：添加LaTex公式块显示支持*
 
 在`_includes`内创建文件`katex.html`（使用katex渲染公式）：
+
+{% raw %}
 
 ```html
 <!--add support for latex formula-->

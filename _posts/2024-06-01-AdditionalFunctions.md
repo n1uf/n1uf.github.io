@@ -6,6 +6,8 @@ categories: function
 top: true
 ---
 
+摘要：本文记录了个人对Jekyll的特别是其中的Minima主题的个性化探索的相关内容。
+
 * minima默认配置：使用`bundle show minima`找到位置，需要修改的文件复制到自己的项目文件夹相同位置即可。
 
 * 本地调试：`bundle exec jekyll serve`。
@@ -77,3 +79,5 @@ top: true
   [创建Action流以实现githubPage上插件的正常运行]({% post_url 2024-06-09-TestLastModified %})
 
 * [日夜间模式切换功能]({% post_url 2024-11-23-DayNightExchange %})
+
+* [博文目录功能]({% post_url 2024-11-24-TocAdd %})
