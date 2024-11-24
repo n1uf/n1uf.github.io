@@ -1,0 +1,36 @@
+<!-- 目录展开按钮的点击事件 -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tocToggleButton = document.getElementById("tocToggleButton");
+  const tocContainer = document.querySelector(".post-toc");
+
+  // 初始检查目录是否已被折叠
+  let isCollapsed = localStorage.getItem("tocCollapsed") === "true";
+
+  if (isCollapsed) {
+    tocContainer.classList.add("collapsed");
+    tocToggleButton.textContent = "展开目录";
+  } else {
+    tocContainer.classList.remove("collapsed");
+    tocToggleButton.textContent = "收起目录";
+  }
+
+  // 切换目录展开与否
+  tocToggleButton.addEventListener("click", () => {
+    tocContainer.classList.toggle("collapsed");
+    isCollapsed = !isCollapsed;
+
+    // 更新按钮文本
+    if (isCollapsed) {
+      tocToggleButton.textContent = "展开目录";
+    } else {
+      tocToggleButton.textContent = "收起目录";
+    }
+
+    // 保存状态到 localStorage
+    localStorage.setItem("tocCollapsed", isCollapsed);
+  });
+});
+
+
+</script>

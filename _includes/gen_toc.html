@@ -1,0 +1,35 @@
+<!-- 动态生成目录的js -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const content = document.querySelector(".post-content"); // 文章内容的容器类名
+      const toc = document.getElementById("toc");
+      const headings = content.querySelectorAll("h2, h3"); // 提取所有 h2 和 h3
+      
+      let currentUl = toc; // 当前的 `<ul>` 容器，用来插入标题
+  
+      headings.forEach((heading) => {
+        const level = parseInt(heading.tagName.substring(1)); // 获取标题的级别，如 h2 -> 2, h3 -> 3
+        const id = heading.textContent.trim().replace(/\s+/g, "-").toLowerCase();
+        heading.id = id; // 为标题添加 id
+  
+        // 创建一个新的 `<li>`
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="#${id}">${heading.textContent}</a>`;
+        
+        // 如果标题的级别比当前的级别大，创建新的 `<ul>`
+        if (level > (currentUl === toc ? 2 : 3)) {
+          const newUl = document.createElement("ul");
+          currentUl.appendChild(newUl);
+          currentUl = newUl; // 更新当前的 `<ul>` 容器
+        } else if (level < (currentUl === toc ? 2 : 3)) {
+          // 如果级别比当前级别小，回退到父级 `<ul>`
+          for (let i = level; i < 3; i++) {
+            currentUl = currentUl.parentElement;
+          }
+        }
+  
+        // 将 `<li>` 添加到当前的 `<ul>`
+        currentUl.appendChild(li);
+      });
+    });
+  </script>

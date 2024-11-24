@@ -15,9 +15,32 @@ layout: default
       {%- endif -%}</p>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
+
+  <div class="post-layout">
+
+    <!-- 目录展开/收起按钮 -->
+    <button class="toc-toggle" id="tocToggleButton">展开目录</button>
+
+    <!-- 目录 -->
+    <aside class="post-toc">
+      <h3>目录</h3>
+      <ul id="toc">
+        <!-- 动态或静态生成目录的代码放在这里 -->
+      </ul>
+    </aside>
+    
+    <div class="post-content e-content" itemprop="articleBody">
+      {{ content }}
+    </div>
+    
   </div>
+
+  <!-- 生成目录 -->
+  {%include gen_toc.html%}
+
+  <!-- 目录展开按钮的点击事件 -->
+  {% include toc-toggle.html %}
+
 
   {%- if site.disqus.shortname -%}
     {%- include disqus_comments.html -%}
