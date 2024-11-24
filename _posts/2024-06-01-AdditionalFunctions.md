@@ -6,7 +6,7 @@ categories: function
 top: true
 ---
 
-摘要：本文记录了个人对Jekyll的特别是其中的Minima主题的个性化探索的相关内容。
+*摘要：本文记录了个人对Jekyll的特别是其中的Minima主题的个性化探索的相关内容。*
 
 * minima默认配置：使用`bundle show minima`找到位置，需要修改的文件复制到自己的项目文件夹相同位置即可。
 

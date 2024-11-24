@@ -6,7 +6,7 @@ latex: true
 categories: Latex Formula
 ---
 
-*摘要：添加LaTex公式块显示支持*
+*摘要：添加LaTex公式块显示支持。*
 
 在`_includes`内创建文件`katex.html`（使用katex渲染公式）：
 
