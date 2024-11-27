@@ -156,6 +156,16 @@ body.transition-enabled {
         background-color: transparent !important;
       }
     }
+
+    // site-nav 夜间样式
+    .site-nav {
+      background-color: #2a2a2a;
+      border-top-color: #555;
+      border-bottom-color: #333;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    
   }
   
 

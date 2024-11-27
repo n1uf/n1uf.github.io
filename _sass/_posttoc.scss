@@ -9,7 +9,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 10;  /* 确保按钮始终在最上层 */
+    z-index: 4;  /* 确保按钮始终在最上层 */
     
     &:hover {
       background-color: #0056b3;
@@ -31,7 +31,7 @@
     opacity: 1;
     transform-origin: top;  /* 让 transform 从顶部开始 */
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
-    z-index: 5;  /* 确保在除了按钮以外的其他内容上方 */
+    z-index: 2;  /* 确保在除了按钮以外的其他内容上方 */
   
     h3 {
       margin-top: 0;

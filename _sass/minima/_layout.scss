@@ -28,6 +28,9 @@
   float: right;
   line-height: $base-line-height * $base-font-size * 2.25;
 
+  // 在最顶层，防止目录遮挡
+  z-index: 10;
+
   .nav-trigger {
       display: none;
   }
