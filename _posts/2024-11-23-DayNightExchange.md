@@ -11,14 +11,14 @@ categories: function
 
 仓库地址：[n1uf的github](https://github.com/n1uf/n1uf.github.io)
 
-功能实现：
+## 功能实现：
 
 1. 使用了`_daynight.scss`创建样式（注意 `!important` 覆盖原有高光样式）。
 2. `header.html`中引用样式（在页头的尾部添加）。
 3. `daynight.html`中写入按钮的点击触发`js`，并引用在`header.html`中。
 4. 在主SCSS文件`main.scss`中导入新样式（`@import "daynight";`）。
 
-一些优化：
+## 一些优化：
 
 1. 蓝色链接在夜间模式显示不清晰问题：添加了`css`中`a`样式的夜间模式颜色适配，并为`title`等类型加了`!important`标签以防也被处理。
 
@@ -137,3 +137,7 @@ categories: function
       ```
 
    通过首次加载禁用过渡，之后使用按钮改变时应用过渡的方式修掉了这个BUG。
+
+4. 移动端 header 尾部的导航栏 site-nav 没有应用为夜间模式。
+
+   在 `daynight.scss` 的 `body.night-mode` 中添加 `.site-nav` 夜间样式。
