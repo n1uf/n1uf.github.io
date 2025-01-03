@@ -1,7 +1,7 @@
 {%- if page.layout == "post" -%}
-    <p style="color: gray; font-size: small;">Post last updated at <br> 
+    <p style="color: gray; font-size: small;"> 博文上次更新时间 <br> 
         {{ page.last_modified_at | date: "%Y-%m-%d %H:%M:%S" }}</p>
 {%- else if page.layout == "home" -%}
-    <p style="color: gray; font-size: small;">Site last updated at <br> 
+    <p style="color: gray; font-size: small;"> 网站上次更新时间 <br> 
         {{ site.time | date: "%Y-%m-%d %H:%M:%S" }}</p>
 {%- endif -%}
