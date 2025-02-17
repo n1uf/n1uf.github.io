@@ -25,7 +25,6 @@ description: >- # this means to ignore newlines until "baseurl:"
   niuf的基于github-page的个人博客
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: niuqingyuan1
 github_username:  n1uf
 bilibili_bid: 398068101
 bilibili_username: 路人_牛
