@@ -2,29 +2,34 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.body.style.visibility = 'visible';
-      const toggleButton = document.getElementById("toggleButton");
+      const themeSwitch = document.getElementById("theme-switch");
       const body = document.body;      
       
       // 检查本地存储中的主题设置
       const currentTheme = localStorage.getItem('theme');
       if (currentTheme === 'night') {
         body.classList.add('night-mode');
-        toggleButton.textContent = "切换到日间模式";
-      } 
+        themeSwitch.checked = true;
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
   
       // 页面加载后添加 transition 类，恢复过渡动画
       setTimeout(() => {
         body.classList.add('transition-enabled');
       }, 100); // 延迟避免初始加载的过渡
   
-      // 切换按钮点击事件
-      toggleButton.addEventListener("click", () => {
-        if (body.classList.toggle("night-mode")) {
-          toggleButton.textContent = "切换到日间模式";
+      // 滑块切换事件
+      themeSwitch.addEventListener("change", () => {
+        if (themeSwitch.checked) {
+          body.classList.add("night-mode");
           localStorage.setItem('theme', 'night');
+          document.documentElement.setAttribute('data-theme', 'dark');
         } else {
-          toggleButton.textContent = "切换到夜间模式";
+          body.classList.remove("night-mode");
           localStorage.setItem('theme', 'day');
+          document.documentElement.setAttribute('data-theme', 'light');
         }       
       });      
     });

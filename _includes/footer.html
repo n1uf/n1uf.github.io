@@ -2,34 +2,64 @@
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
 
   <div class="wrapper">
-
-    <h2 class="footer-heading">{{ site.title | escape }}</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">
-            {%- if site.author -%}
-              {{ site.author | escape }}
-            {%- else -%}
-              {{ site.title | escape }}
-            {%- endif -%}
-
-            {%- include update_time.html -%}            
-
-            </li>
-        </ul>
+    <div class="footer-content">
+      <div class="footer-main">
+        <h2 class="footer-heading">{{ site.title | escape }}</h2>
+        <p class="footer-description">{{ site.description | escape }}</p>
+        
+        <div class="footer-meta">
+          <div class="footer-author">
+            <span class="author-icon">👤</span>
+            <span class="author-name">
+              {%- if site.author -%}
+                {{ site.author | escape }}
+              {%- else -%}
+                {{ site.title | escape }}
+              {%- endif -%}
+            </span>
+          </div>
+          
+          {%- include update_time.html -%}
+        </div>
       </div>
 
-      <div class="footer-col footer-col-2">
-        {%- include social.html -%}
-      </div>
+      <div class="footer-links">
+        <div class="footer-section">
+          <h3 class="footer-section-title">🔗 快速链接</h3>
+          <ul class="footer-nav">
+            <li><a href="{{ "/" | relative_url }}">首页</a></li>
+            <li><a href="{{ "/about" | relative_url }}">关于我</a></li>
+            <li><a href="{{ "/calculator" | relative_url }}">计算器</a></li>
+            <li><a href="{{ "/feed.xml" | relative_url }}">RSS 订阅</a></li>
+          </ul>
+        </div>
 
-      <div class="footer-col footer-col-3">
-        <p>{{- site.description | escape -}}</p>
+        <div class="footer-section">
+          <h3 class="footer-section-title">📱 社交媒体</h3>
+          {%- include social.html -%}
+        </div>
+
+        <div class="footer-section">
+          <h3 class="footer-section-title">📊 网站统计</h3>
+          <div class="footer-stats">
+            <div class="stat-item">
+              <span class="stat-number">{{ site.posts.size }}</span>
+              <span class="stat-label">篇文章</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ site.pages.size }}</span>
+              <span class="stat-label">个页面</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author | default: site.title }}. 保留所有权利。</p>
+        <p class="footer-powered">由 <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> 驱动，托管于 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></p>
+      </div>
+    </div>
   </div>
-
 </footer>

@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/WebPage">
+
+  <header class="post-header">
+    <div class="post-header-content">
+      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    </div>
+  </header>
+
+  <div class="page-content">
+    <div class="wrapper">
+      <div class="about-content">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

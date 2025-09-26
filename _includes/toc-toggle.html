@@ -2,35 +2,46 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const tocToggleButton = document.getElementById("tocToggleButton");
-  const tocContainer = document.querySelector(".post-toc");
+  const tocContent = document.getElementById("tocContent");
+  
+  // 检查元素是否存在
+  if (!tocToggleButton || !tocContent) {
+    console.log('目录元素未找到，跳过目录切换功能');
+    return;
+  }
+  
+  const tocToggleText = tocToggleButton.querySelector(".toc-toggle-text");
+  const tocToggleIcon = tocToggleButton.querySelector(".toc-toggle-icon");
 
   // 初始检查目录是否已被折叠
   let isCollapsed = localStorage.getItem("tocCollapsed") === "true";
 
-  if (isCollapsed) {
-    tocContainer.classList.add("collapsed");
-    tocToggleButton.textContent = "展开目录";
-  } else {
-    tocContainer.classList.remove("collapsed");
-    tocToggleButton.textContent = "收起目录";
+  // 初始化状态
+  function updateTocState() {
+    if (isCollapsed) {
+      tocContent.style.display = "none";
+      if (tocToggleText) tocToggleText.textContent = "展开";
+      if (tocToggleIcon) tocToggleIcon.textContent = "▼";
+    } else {
+      tocContent.style.display = "block";
+      if (tocToggleText) tocToggleText.textContent = "收起";
+      if (tocToggleIcon) tocToggleIcon.textContent = "▲";
+    }
   }
 
+  // 初始设置
+  updateTocState();
+
   // 切换目录展开与否
-  tocToggleButton.addEventListener("click", () => {
-    tocContainer.classList.toggle("collapsed");
+  tocToggleButton.addEventListener("click", (e) => {
+    e.preventDefault();
     isCollapsed = !isCollapsed;
-
-    // 更新按钮文本
-    if (isCollapsed) {
-      tocToggleButton.textContent = "展开目录";
-    } else {
-      tocToggleButton.textContent = "收起目录";
-    }
-
+    updateTocState();
+    
     // 保存状态到 localStorage
     localStorage.setItem("tocCollapsed", isCollapsed);
+    
+    console.log('目录状态切换:', isCollapsed ? '收起' : '展开');
   });
 });
-
-
 </script>

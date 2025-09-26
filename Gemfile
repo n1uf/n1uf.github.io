@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "https://gems.ruby-china.com"
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
 # file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
@@ -26,13 +26,21 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 # Performance-booster for watching directories on Windows
-gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
+# wdm 与 Ruby 3.2+ 不兼容；仅在 Windows 且 Ruby < 3.2 时安装
+if Gem::Platform.local.os == "mingw" || Gem::Platform.local.os == "mswin"
+  if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("3.2")
+    gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
+  end
+end
 
 # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 gem "webrick", "~> 1.8"
+
+# Ruby 3.4+ 兼容性：csv 不再是默认 gem
+gem "csv"
 
 # Jekyll cache
 gem 'jekyll-include-cache'

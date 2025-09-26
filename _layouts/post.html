@@ -1,46 +1,101 @@
 ---
 layout: default
 ---
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <!-- 文章头部 -->
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}</p>
+    <div class="post-header-content">
+      <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+      <div class="post-meta">
+        <div class="post-meta-item">
+          <span class="meta-icon">📅</span>
+          <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+            {%- assign date_format = site.minima.date_format | default: "%Y年%m月%d日" -%}
+            {{ page.date | date: date_format }}
+          </time>
+        </div>
+        {%- if page.author -%}
+        <div class="post-meta-item">
+          <span class="meta-icon">👤</span>
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+          </span>
+        </div>
+        {%- endif -%}
+        {%- if page.last_modified_at -%}
+        <div class="post-meta-item">
+          <span class="meta-icon">🔄</span>
+          <time class="last-modified" datetime="{{ page.last_modified_at | date_to_xmlschema }}">
+            更新于 {{ page.last_modified_at | date: "%Y年%m月%d日" }}
+          </time>
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
   </header>
 
-
+  <!-- 文章内容区域 -->
   <div class="post-layout">
-
-    <!-- 目录展开/收起按钮 -->
-    <button class="toc-toggle" id="tocToggleButton">展开目录</button>
-
-    <!-- 目录 -->
+    <!-- 目录区域 -->
     <aside class="post-toc">
-      <h3>目录</h3>
-      <ul id="toc">
-        <!-- 动态或静态生成目录的代码放在这里 -->
-      </ul>
+      <div class="toc-header">
+        <h3 class="toc-title">📋 目录</h3>
+        <button class="toc-toggle" id="tocToggleButton">
+          <span class="toc-toggle-text">收起</span>
+          <span class="toc-toggle-icon">▲</span>
+        </button>
+      </div>
+      <nav class="toc-content" id="tocContent">
+        <ul id="toc" class="toc-list">
+          <!-- 动态生成目录 -->
+        </ul>
+      </nav>
     </aside>
     
+    <!-- 文章正文 -->
     <div class="post-content e-content" itemprop="articleBody">
       {{ content }}
     </div>
-    
   </div>
+
+  <!-- 文章底部 -->
+  <footer class="post-footer">
+    <div class="post-footer-content">
+      <div class="post-tags">
+        {%- if page.tags -%}
+        <div class="tags-label">🏷️ 标签：</div>
+        <div class="tags-list">
+          {%- for tag in page.tags -%}
+          <span class="tag">{{ tag }}</span>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+      
+      <div class="post-navigation">
+        {%- if page.previous -%}
+        <a href="{{ page.previous.url | relative_url }}" class="nav-link nav-prev">
+          <span class="nav-icon">←</span>
+          <span class="nav-text">{{ page.previous.title | truncate: 30 }}</span>
+        </a>
+        {%- endif -%}
+        
+        {%- if page.next -%}
+        <a href="{{ page.next.url | relative_url }}" class="nav-link nav-next">
+          <span class="nav-text">{{ page.next.title | truncate: 30 }}</span>
+          <span class="nav-icon">→</span>
+        </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </footer>
 
   <!-- 生成目录 -->
   {%include gen_toc.html%}
 
   <!-- 目录展开按钮的点击事件 -->
   {% include toc-toggle.html %}
-
 
   {%- if site.disqus.shortname -%}
     {%- include disqus_comments.html -%}

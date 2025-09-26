@@ -3,51 +3,94 @@ layout: default
 ---
 
 <div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+  <!-- 英雄区域 -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-title-main">{{ site.title | escape }}</span>
+        <span class="hero-title-sub">{{ site.description | escape }}</span>
+      </h1>
+      <div class="hero-actions">
+        <a href="#posts" class="btn btn-primary">浏览文章</a>
+        <a href="{{ '/about' | relative_url }}" class="btn btn-secondary">关于我</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-elements">
+        <div class="floating-element element-1"></div>
+        <div class="floating-element element-2"></div>
+        <div class="floating-element element-3"></div>
+      </div>
+    </div>
+  </section>
 
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "博文" }}</h2>
-    <ul class="post-list">
-      {%- assign top_posts = site.posts | where: "top", true -%}
-      {%- assign regular_posts = site.posts | where_exp: "post", "post.top != true" -%}
+    <section id="posts" class="posts-section">
+      <div class="section-header">
+        <h2 class="section-title">{{ page.list_title | default: "最新文章" }}</h2>
+        <p class="section-subtitle">分享技术心得，记录成长历程</p>
+      </div>
+      
+      <div class="post-list">
+        {%- assign top_posts = site.posts | where: "top", true -%}
+        {%- assign regular_posts = site.posts | where_exp: "post", "post.top != true" -%}
 
-      <!-- 遍历置顶文章 -->
-      {%- for post in top_posts -%}
-      <li>
-        <strong class="post-meta">置顶<br /></strong>
-        {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
+        <!-- 遍历置顶文章 -->
+        {%- for post in top_posts -%}
+        <article class="post-card featured">
+          <div class="post-card-header">
+            <div class="post-badge">⭐ 置顶</div>
+            <time class="post-date">{{ post.date | date: "%Y年%m月%d日" }}</time>
+          </div>
+          <h3 class="post-title">
+            <a href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          {%- if post.excerpt -%}
+            <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+          {%- endif -%}
+          <div class="post-footer">
+            <a href="{{ post.url | relative_url }}" class="read-more">
+              阅读更多 <span class="arrow">→</span>
+            </a>
+          </div>
+        </article>
+        {%- endfor -%}
 
-      <!-- 遍历非置顶文章 -->
-      {%- for post in regular_posts -%}
-      <li>
-        {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
+        <!-- 遍历非置顶文章 -->
+        {%- for post in regular_posts -%}
+        <article class="post-card">
+          <div class="post-card-header">
+            <time class="post-date">{{ post.date | date: "%Y年%m月%d日" }}</time>
+          </div>
+          <h3 class="post-title">
+            <a href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          {%- if post.excerpt -%}
+            <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+          {%- endif -%}
+          <div class="post-footer">
+            <a href="{{ post.url | relative_url }}" class="read-more">
+              阅读更多 <span class="arrow">→</span>
+            </a>
+          </div>
+        </article>
+        {%- endfor -%}
+      </div>
+      
+      <div class="section-footer">
+        <p class="rss-subscribe">
+          <a href="{{ '/feed.xml' | relative_url }}" class="rss-link">
+            <span class="rss-icon">📡</span>
+            订阅 RSS 源
           </a>
-        </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+        </p>
+      </div>
+    </section>
   {%- endif -%}
 </div>
