@@ -31,7 +31,7 @@ jobs:
       
     - name: Build with Jekyll
       run: |
-        bundle exec jekyll build --baseurl "${{ steps.determine-url.outputs.url }}"
+        bundle exec jekyll build
       env:
         JEKYLL_ENV: production
         
