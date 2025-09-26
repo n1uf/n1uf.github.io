@@ -41,7 +41,6 @@ gem "webrick", "~> 1.8"
 
 # Ruby 3.4+ 兼容性：csv 不再是默认 gem
 gem "csv"
-
 # Jekyll cache
 gem 'jekyll-include-cache'
 

@@ -31,13 +31,12 @@ bilibili_username: 路人_牛
 
 # Build settings
 theme: minima
+
+# 插件配置
 plugins:
   - jekyll-feed
-plugins:
   - jekyll-include-cache
-plugins:
   - jekyll-seo-tag
-plugins:
   - jekyll-last-modified-at
 
 
