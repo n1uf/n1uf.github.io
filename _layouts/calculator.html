@@ -15,7 +15,7 @@ layout: default
     {{ content }}
   </div>
 
-  <!-- 计算器样式 -->
+  <!-- 卡西欧风格计算器样式 -->
   <style>
     .calculator-container {
       display: flex;
@@ -24,271 +24,385 @@ layout: default
     }
 
     .calculator {
-      background: linear-gradient(145deg, #f0f0f0, #cacaca);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-      max-width: 320px;
+      background: linear-gradient(145deg, #e8e8e8, #d0d0d0);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      max-width: 380px;
       width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .display {
       margin-bottom: 20px;
+      position: relative;
     }
 
     .display input {
       width: 100%;
-      height: 60px;
-      border: none;
-      border-radius: 10px;
-      background: #000;
-      color: #00ff00;
-      font-size: 24px;
-      text-align: right;
-      padding: 0 15px;
+      height: 80px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      background: #1a1a1a;
+      color: #00ff41;
+      font-size: 28px;
+      text-align: left;
+      padding: 0 20px;
       font-family: 'Courier New', monospace;
-      box-shadow: inset 5px 5px 10px #000000, inset -5px -5px 10px #333333;
+      font-weight: bold;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .display input:focus {
+      border-color: #007acc;
+      box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.3),
+        0 0 0 2px rgba(0, 122, 204, 0.2);
     }
 
     .buttons {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
     }
 
     .btn {
-      height: 60px;
+      height: 65px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+      transition: all 0.15s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.1));
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn:hover:before {
+      opacity: 1;
     }
 
     .btn:active {
-      transform: translateY(0);
-      box-shadow: 2px 2px 5px #bebebe, -2px -2px 5px #ffffff;
+      transform: translateY(1px);
     }
 
     .btn-number {
-      background: linear-gradient(145deg, #e6e6e6, #ffffff);
+      background: linear-gradient(145deg, #f8f8f8, #e0e0e0);
       color: #333;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .btn-operator {
-      background: linear-gradient(145deg, #ff6b6b, #ff5252);
+      background: linear-gradient(145deg, #ff6b35, #e55a2b);
       color: white;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-function {
+      background: linear-gradient(145deg, #4a90e2, #357abd);
+      color: white;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-equals {
-      background: linear-gradient(145deg, #4ecdc4, #26a69a);
+      background: linear-gradient(145deg, #27ae60, #229954);
       color: white;
       grid-row: span 2;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-clear {
-      background: linear-gradient(145deg, #ffa726, #ff9800);
+      background: linear-gradient(145deg, #e74c3c, #c0392b);
       color: white;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-zero {
       grid-column: span 2;
     }
 
+    .btn-parenthesis {
+      background: linear-gradient(145deg, #9b59b6, #8e44ad);
+      color: white;
+      box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
     /* 夜间模式适配 */
     .night-mode .calculator {
-      background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-      box-shadow: 20px 20px 60px #0f0f0f, -20px -20px 60px #3a3a3a;
+      background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .night-mode .display input {
-      background: #000;
-      color: #00ff00;
-      box-shadow: inset 5px 5px 10px #000000, inset -5px -5px 10px #333333;
+      background: #0a0a0a;
+      color: #00ff41;
+      border-color: #444;
     }
 
     .night-mode .btn-number {
-      background: linear-gradient(145deg, #404040, #606060);
+      background: linear-gradient(145deg, #404040, #2a2a2a);
       color: #fff;
     }
 
     .night-mode .btn-operator {
-      background: linear-gradient(145deg, #d32f2f, #f44336);
+      background: linear-gradient(145deg, #d35400, #a04000);
+    }
+
+    .night-mode .btn-function {
+      background: linear-gradient(145deg, #2980b9, #1f5f8b);
     }
 
     .night-mode .btn-equals {
-      background: linear-gradient(145deg, #00695c, #26a69a);
+      background: linear-gradient(145deg, #1e8449, #145a32);
     }
 
     .night-mode .btn-clear {
-      background: linear-gradient(145deg, #ef6c00, #ff9800);
+      background: linear-gradient(145deg, #c0392b, #922b21);
+    }
+
+    .night-mode .btn-parenthesis {
+      background: linear-gradient(145deg, #7d3c98, #5b2c6f);
     }
 
     /* 响应式设计 */
     @media (max-width: 480px) {
       .calculator {
         margin: 0 10px;
-        padding: 15px;
+        padding: 20px;
       }
       
       .btn {
-        height: 50px;
+        height: 55px;
         font-size: 16px;
       }
       
       .display input {
-        height: 50px;
-        font-size: 20px;
+        height: 70px;
+        font-size: 24px;
       }
     }
   </style>
 
-  <!-- 计算器JavaScript功能 -->
+  <!-- 卡西欧风格计算器JavaScript功能 -->
   <script>
-    let display = document.getElementById('display');
-    let currentInput = '';
-    let operator = '';
-    let previousInput = '';
-    let shouldResetDisplay = false;
-
-    function appendToDisplay(value) {
-      if (shouldResetDisplay) {
-        display.value = '';
-        shouldResetDisplay = false;
+    class Calculator {
+      constructor() {
+        this.display = document.getElementById('display');
+        this.expression = '';
+        this.lastResult = '';
+        this.init();
       }
-      
-      if (value === '.' && display.value.includes('.')) {
-        return; // 防止多个小数点
-      }
-      
-      if (display.value === '0' && value !== '.') {
-        display.value = value;
-      } else {
-        display.value += value;
-      }
-      currentInput = display.value;
-    }
 
-    function clearDisplay() {
-      display.value = '';
-      currentInput = '';
-      operator = '';
-      previousInput = '';
-      shouldResetDisplay = false;
-    }
+      init() {
+        // 绑定键盘事件
+        this.display.addEventListener('input', (e) => {
+          this.expression = e.target.value;
+        });
 
-    function deleteLast() {
-      if (display.value.length > 0) {
-        display.value = display.value.slice(0, -1);
-        currentInput = display.value;
+        this.display.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === '=') {
+            e.preventDefault();
+            this.calculate();
+          } else if (e.key === 'Escape') {
+            this.clear();
+          }
+        });
+
+        // 绑定按钮事件
+        this.bindButtons();
       }
-    }
 
-    function setOperator(op) {
-      if (currentInput === '') return;
-      
-      if (operator !== '' && previousInput !== '') {
-        calculate();
-      }
-      
-      operator = op;
-      previousInput = currentInput;
-      shouldResetDisplay = true;
-    }
+      bindButtons() {
+        // 数字按钮
+        document.querySelectorAll('.btn-number').forEach(btn => {
+          btn.addEventListener('click', () => {
+            this.appendToExpression(btn.textContent);
+          });
+        });
 
-    function calculate() {
-      if (operator === '' || previousInput === '' || currentInput === '') return;
-      
-      let result;
-      const prev = parseFloat(previousInput);
-      const current = parseFloat(currentInput);
-      
-      try {
-        switch (operator) {
-          case '+':
-            result = prev + current;
-            break;
-          case '-':
-            result = prev - current;
-            break;
-          case '*':
-            result = prev * current;
-            break;
-          case '/':
-            if (current === 0) {
-              display.value = 'Error: 除零';
-              resetCalculator();
-              return;
+        // 运算符按钮
+        document.querySelectorAll('.btn-operator').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const op = btn.textContent;
+            if (op === '×') this.appendToExpression('*');
+            else if (op === '÷') this.appendToExpression('/');
+            else this.appendToExpression(op);
+          });
+        });
+
+        // 功能按钮
+        document.querySelectorAll('.btn-function').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const func = btn.textContent;
+            if (func === '√') this.appendToExpression('sqrt(');
+            else if (func === '^') this.appendToExpression('^');
+            else if (func === 'π') this.appendToExpression(Math.PI.toString());
+            else if (func === 'e') this.appendToExpression(Math.E.toString());
+          });
+        });
+
+        // 括号按钮
+        document.querySelectorAll('.btn-parenthesis').forEach(btn => {
+          btn.addEventListener('click', () => {
+            this.appendToExpression(btn.textContent);
+          });
+        });
+
+        // 等号按钮
+        document.querySelector('.btn-equals').addEventListener('click', () => {
+          this.calculate();
+        });
+
+        // 清除按钮
+        document.querySelectorAll('.btn-clear').forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (btn.textContent === 'C') {
+              this.clear();
+            } else if (btn.textContent === '⌫') {
+              this.backspace();
             }
-            result = prev / current;
-            break;
-          default:
-            return;
+          });
+        });
+      }
+
+      appendToExpression(value) {
+        this.expression += value;
+        this.display.value = this.expression;
+        this.display.focus();
+      }
+
+      clear() {
+        this.expression = '';
+        this.display.value = '';
+        this.lastResult = '';
+        this.display.focus();
+      }
+
+      backspace() {
+        this.expression = this.expression.slice(0, -1);
+        this.display.value = this.expression;
+        this.display.focus();
+      }
+
+      calculate() {
+        try {
+          if (!this.expression.trim()) return;
+
+          // 预处理表达式
+          let processedExpression = this.preprocessExpression(this.expression);
+          
+          // 计算表达式
+          const result = this.evaluateExpression(processedExpression);
+          
+          if (isNaN(result) || !isFinite(result)) {
+            throw new Error('计算结果无效');
+          }
+
+          // 格式化结果
+          const formattedResult = this.formatResult(result);
+          
+          this.display.value = formattedResult;
+          this.lastResult = formattedResult;
+          this.expression = formattedResult;
+          
+        } catch (error) {
+          this.display.value = 'Error';
+          this.expression = '';
+          console.error('计算错误:', error);
+        }
+        this.display.focus();
+      }
+
+      preprocessExpression(expr) {
+        // 替换中文符号
+        expr = expr.replace(/×/g, '*').replace(/÷/g, '/');
+        
+        // 处理sqrt函数
+        expr = expr.replace(/sqrt\(/g, 'Math.sqrt(');
+        
+        // 处理乘方
+        expr = expr.replace(/\^/g, '**');
+        
+        // 处理π和e
+        expr = expr.replace(/π/g, Math.PI.toString());
+        expr = expr.replace(/e/g, Math.E.toString());
+        
+        // 确保括号匹配
+        const openParens = (expr.match(/\(/g) || []).length;
+        const closeParens = (expr.match(/\)/g) || []).length;
+        expr += ')'.repeat(Math.max(0, openParens - closeParens));
+        
+        return expr;
+      }
+
+      evaluateExpression(expr) {
+        // 使用Function构造函数安全地计算表达式
+        // 只允许数学运算和Math对象
+        const allowedChars = /^[0-9+\-*/().\s,Math.sqrt()**]+$/;
+        if (!allowedChars.test(expr)) {
+          throw new Error('表达式包含非法字符');
+        }
+
+        try {
+          // 创建安全的计算函数
+          const func = new Function('Math', `return ${expr}`);
+          return func(Math);
+        } catch (error) {
+          throw new Error('表达式语法错误');
+        }
+      }
+
+      formatResult(num) {
+        // 处理精度问题
+        if (num % 1 === 0) {
+          return num.toString();
         }
         
-        // 处理结果精度
-        if (result % 1 !== 0) {
-          result = Math.round(result * 100000000) / 100000000;
+        // 限制小数位数
+        const rounded = Math.round(num * 100000000) / 100000000;
+        
+        // 科学计数法处理
+        if (Math.abs(rounded) >= 1e10 || (Math.abs(rounded) < 1e-6 && rounded !== 0)) {
+          return rounded.toExponential(6);
         }
         
-        display.value = result.toString();
-        currentInput = result.toString();
-        operator = '';
-        previousInput = '';
-        shouldResetDisplay = true;
-        
-      } catch (error) {
-        display.value = 'Error';
-        resetCalculator();
+        return rounded.toString();
       }
     }
 
-    function resetCalculator() {
-      currentInput = '';
-      operator = '';
-      previousInput = '';
-      shouldResetDisplay = false;
-    }
-
-    // 键盘支持
-    document.addEventListener('keydown', function(event) {
-      const key = event.key;
-      
-      if (key >= '0' && key <= '9' || key === '.') {
-        appendToDisplay(key);
-      } else if (key === '+' || key === '-' || key === '*' || key === '/') {
-        setOperator(key);
-      } else if (key === 'Enter' || key === '=') {
-        event.preventDefault();
-        calculate();
-      } else if (key === 'Escape' || key === 'c' || key === 'C') {
-        clearDisplay();
-      } else if (key === 'Backspace') {
-        deleteLast();
-      }
-    });
-
-    // 更新按钮点击事件以使用setOperator
+    // 初始化计算器
     document.addEventListener('DOMContentLoaded', function() {
-      // 重新绑定运算符按钮
-      const operatorButtons = document.querySelectorAll('.btn-operator');
-      operatorButtons.forEach(btn => {
-        const value = btn.textContent;
-        if (value === '×') {
-          btn.onclick = () => setOperator('*');
-        } else if (value === '÷') {
-          btn.onclick = () => setOperator('/');
-        } else {
-          btn.onclick = () => setOperator(value);
-        }
-      });
+      new Calculator();
     });
   </script>
 
