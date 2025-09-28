@@ -219,6 +219,9 @@
             border-radius: 10px;
             margin-top: 15px;
             display: none;
+            white-space: pre-line;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
 
         .success {
@@ -367,6 +370,9 @@
                 <div class="input-group">
                     <label for="encryptedText">请输入要解密的密文：</label>
                     <textarea id="encryptedText" placeholder="在此输入密文字符..."></textarea>
+                    <div style="margin-top: 8px; font-size: 0.8rem; color: #666;">
+                        💡 提示：密文只能包含字符集中的字符：<span id="charsetHint" style="font-family: monospace; background: #f0f0f0; padding: 2px 4px; border-radius: 3px;">哈基米哦南北绿豆啊西嘎呀库录</span>
+                    </div>
                 </div>
                 <div class="button-group">
                     <button class="btn-decrypt" onclick="decryptText()">🔓 解密</button>
@@ -470,6 +476,40 @@
             }
         }
 
+        // 验证密文格式
+        function validateEncryptedText(text) {
+            const errors = [];
+            
+            if (!text) {
+                errors.push('密文不能为空');
+                return errors;
+            }
+            
+            // 检查字符集
+            const invalidChars = [];
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                if (!CHAR_SET.includes(char)) {
+                    invalidChars.push({
+                        char: char,
+                        position: i + 1
+                    });
+                }
+            }
+            
+            if (invalidChars.length > 0) {
+                errors.push(`密文包含无效字符: ${invalidChars.map(item => `"${item.char}"(位置${item.position})`).join(', ')}`);
+                errors.push(`有效字符集: ${CHAR_SET}`);
+            }
+            
+            // 检查密文长度（太短可能不是有效密文）
+            if (text.length < 2) {
+                errors.push('密文长度过短，可能不是有效的加密结果');
+            }
+            
+            return errors;
+        }
+
         // 解密函数
         function decryptText() {
             const encryptedText = document.getElementById('encryptedText').value.trim();
@@ -479,13 +519,15 @@
                 return;
             }
 
+            // 验证输入
+            const validationErrors = validateEncryptedText(encryptedText);
+            if (validationErrors.length > 0) {
+                const errorMessage = validationErrors.join('\n');
+                showMessage(errorMessage, 'error');
+                return;
+            }
+
             try {
-                // 验证字符集
-                for (let char of encryptedText) {
-                    if (!CHAR_SET.includes(char)) {
-                        throw new Error(`密文包含无效字符: ${char}`);
-                    }
-                }
                 
                 // 转换为大数字
                 const bigNumber = baseStringToNumber(encryptedText, BASE);
@@ -577,6 +619,33 @@
         document.getElementById('encryptedText').addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 decryptText();
+            }
+        });
+
+        // 实时验证密文输入
+        document.getElementById('encryptedText').addEventListener('input', function(e) {
+            const text = e.target.value.trim();
+            
+            if (text.length > 0) {
+                const validationErrors = validateEncryptedText(text);
+                
+                // 清除之前的错误样式
+                e.target.style.borderColor = '';
+                e.target.style.backgroundColor = '';
+                
+                if (validationErrors.length > 0) {
+                    // 显示输入错误样式
+                    e.target.style.borderColor = '#ff6b6b';
+                    e.target.style.backgroundColor = 'rgba(255, 107, 107, 0.1)';
+                } else {
+                    // 显示输入正确样式
+                    e.target.style.borderColor = '#43e97b';
+                    e.target.style.backgroundColor = 'rgba(67, 233, 123, 0.1)';
+                }
+            } else {
+                // 清空时恢复正常样式
+                e.target.style.borderColor = '';
+                e.target.style.backgroundColor = '';
             }
         });
 
@@ -691,6 +760,9 @@
         // 页面加载完成后的初始化
         document.addEventListener('DOMContentLoaded', function() {
             showMessage('欢迎使用哈基米加密解密工具！', 'success');
+            
+            // 同步字符集提示
+            document.getElementById('charsetHint').textContent = CHAR_SET;
             
             // 自动测试
             const testResult = testEncryption();
