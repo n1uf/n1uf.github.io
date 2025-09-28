@@ -31,6 +31,15 @@
           localStorage.setItem('theme', 'day');
           document.documentElement.setAttribute('data-theme', 'light');
         }       
-      });      
+      });
+      
+      // 页面加载时应用保存的主题
+      if (currentTheme === 'night') {
+        body.classList.add("night-mode");
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        body.classList.remove("night-mode");
+        document.documentElement.setAttribute('data-theme', 'light');
+      }      
     });
   </script>

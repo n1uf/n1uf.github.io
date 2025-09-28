@@ -74,10 +74,17 @@ body.transition-enabled {
     figure.highlight,
     .highlight {
       background: #1a1a1a !important;
+      border-color: #444 !important;
 
       pre.highlight,
-      code {
+      pre {
         background: #1a1a1a !important;
+        border: none !important;
+        
+        code {
+          background: transparent !important;
+          color: #f8f8f2 !important;
+        }
       }
     
       .highlighter-rouge & {
@@ -143,17 +150,21 @@ body.transition-enabled {
     }
 
     // 行内代码样式
-    code.highlighter-rouge {
-    background-color: #2d2d2d !important;
-    color: #f8f8f2 !important;
+    code.highlighter-rouge,
+    code {
+      background-color: #2d2d2d !important;
+      color: #f8f8f2 !important;
+      border-color: #444 !important;
     }
 
     // 添加对 pre 标签的样式
     pre {
       background-color: #1a1a1a !important;
+      border-color: #444 !important;
     
       > code {
         background-color: transparent !important;
+        color: #f8f8f2 !important;
       }
     }
 

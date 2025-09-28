@@ -1542,6 +1542,37 @@ img {
     }
   }
   
+  // 代码块样式 - 确保在黑夜模式下正确显示
+  .highlight,
+  figure.highlight,
+  div.highlight {
+    background: var(--bg-secondary) !important;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    margin: var(--spacing-lg) 0;
+    
+    pre {
+      background: var(--bg-secondary) !important;
+      margin: 0;
+      border: none;
+      border-radius: var(--radius-lg);
+      
+      code {
+        background: transparent !important;
+        color: var(--text-primary) !important;
+      }
+    }
+  }
+  
+  // 行内代码样式
+  code.highlighter-rouge {
+    background: var(--bg-secondary) !important;
+    color: var(--primary-color) !important;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+  }
+  
   blockquote {
     border-left: 4px solid var(--primary-color);
     background: var(--bg-secondary);
