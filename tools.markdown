@@ -28,17 +28,6 @@ permalink: /tools/
     <div class="coming-soon">
       <h3>🔧 更多工具即将推出</h3>
       <p>我们正在开发更多实用工具，敬请期待！</p>
-      
-      <div class="tool-list">
-        <div class="tool-item">📐 单位转换器</div>
-        <div class="tool-item">🎨 颜色工具</div>
-        <div class="tool-item">📝 文本处理工具</div>
-        <div class="tool-item">🖼️ 图片处理工具</div>
-        <div class="tool-item">📊 数据可视化工具</div>
-        <div class="tool-item">🔍 文件格式转换</div>
-        <div class="tool-item">🔢 密码生成器</div>
-        <div class="tool-item">📱 二维码生成器</div>
-      </div>
     </div>
 
     <div class="feedback-section">
