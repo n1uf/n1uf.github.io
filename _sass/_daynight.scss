@@ -176,6 +176,55 @@ body.transition-enabled {
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    // 表格夜间模式样式
+    table {
+      background-color: #2a2a2a !important;
+      border-color: #555 !important;
+      color: #ffffff !important;
+      
+      th {
+        background-color: #3a3a3a !important;
+        color: #ffffff !important;
+        border-color: #555 !important;
+      }
+      
+      td {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border-color: #555 !important;
+      }
+      
+      // 修复隔行换色问题
+      tr {
+        &:nth-child(even) {
+          background-color: #333333 !important;
+          
+          td {
+            background-color: #333333 !important;
+            color: #ffffff !important;
+          }
+        }
+        
+        &:nth-child(odd) {
+          background-color: #2a2a2a !important;
+          
+          td {
+            background-color: #2a2a2a !important;
+            color: #ffffff !important;
+          }
+        }
+        
+        &:hover {
+          background-color: #4a5568 !important;
+          
+          td {
+            background-color: #4a5568 !important;
+            color: #ffffff !important;
+          }
+        }
+      }
+    }
+
     
   }
   
