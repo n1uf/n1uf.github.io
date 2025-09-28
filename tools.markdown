@@ -10,7 +10,7 @@ permalink: /tools/
     <h1>🛠️ 工具集合</h1>
     
     <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-      欢迎使用我们的在线工具集合！这里汇集了各种实用的工具，帮助您更高效地完成日常任务。
+      欢迎使用我的在线工具集合！这里汇集了各种实用的工具，帮助您更高效地完成日常任务。
     </p>
 
     <div class="tool-card">
@@ -27,12 +27,12 @@ permalink: /tools/
 
     <div class="coming-soon">
       <h3>🔧 更多工具即将推出</h3>
-      <p>我们正在开发更多实用工具，敬请期待！</p>
+      <p>我正在开发更多实用工具，敬请期待！</p>
     </div>
 
     <div class="feedback-section">
       <h3>💡 建议反馈</h3>
-      <p>如果您有任何工具需求或建议，欢迎通过以下方式联系我们：</p>
+      <p>如果您有任何工具需求或建议，欢迎通过以下方式联系我：</p>
       
       <div class="contact-links">
         <a href="mailto:2318607163@qq.com">
