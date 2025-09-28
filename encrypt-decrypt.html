@@ -171,6 +171,45 @@
             font-family: 'Courier New', monospace;
             font-size: 16px;
             line-height: 1.6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .result:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .result:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .result::after {
+            content: "点击复制";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        .result:hover::after {
+            opacity: 1;
+        }
+
+        .result.copied {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            transform: scale(1.02);
+        }
+
+        .result.copied::after {
+            content: "已复制!";
+            color: white;
+            font-weight: bold;
         }
 
         .error {
@@ -504,7 +543,27 @@
         // 为结果区域添加点击复制功能
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('result')) {
-                copyToClipboard(e.target.textContent);
+                const resultElement = e.target;
+                const textToCopy = resultElement.textContent;
+                
+                // 添加复制动效
+                resultElement.classList.add('copied');
+                
+                // 复制到剪贴板
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // 复制成功，显示成功消息
+                    showMessage('已复制到剪贴板！', 'success');
+                    
+                    // 2秒后移除动效
+                    setTimeout(() => {
+                        resultElement.classList.remove('copied');
+                    }, 2000);
+                    
+                }).catch(() => {
+                    // 复制失败
+                    resultElement.classList.remove('copied');
+                    showMessage('复制失败！', 'error');
+                });
             }
         });
 
