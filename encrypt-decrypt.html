@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈基米加密解密工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-left: 4px solid #ff6b6b;
+            padding-left: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-encrypt {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-decrypt {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .char-set {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .char-set h4 {
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .char-display {
+            font-size: 1.5rem;
+            color: #6c757d;
+            word-break: break-all;
+            line-height: 1.8;
+        }
+
+        .result {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            min-height: 60px;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .success {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            button {
+                min-width: auto;
+            }
+        }
+
+        /* 返回按钮样式 */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+
+        .back-button span {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover span {
+            transform: translateX(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                <a href="/tools/" class="back-button">
+                    <span>←</span>
+                    返回工具集合
+                </a>
+            </div>
+            <h1>🔐 哈基米加密解密工具</h1>
+            <p>使用特殊字符集进行加密解密的在线工具</p>
+        </div>
+        
+        <div class="content">
+            <div class="char-set">
+                <h4>📝 加密字符集</h4>
+                <div class="char-display" id="charSet">哈基米我那咩鲁拖啊西嘎呀库录</div>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                    支持所有Unicode字符：中文、英文、数字、符号、表情等
+                </p>
+            </div>
+
+            <div class="char-set" style="margin-bottom: 30px;">
+                <h4>💡 使用示例</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #28a745;">
+                        <strong>中文：</strong><br>
+                        你好世界
+                    </div>
+                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #007bff;">
+                        <strong>英文：</strong><br>
+                        Hello World
+                    </div>
+                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #ffc107;">
+                        <strong>数字：</strong><br>
+                        123456789
+                    </div>
+                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #dc3545;">
+                        <strong>混合：</strong><br>
+                        Hello你好123!
+                    </div>
+                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #6f42c1;">
+                        <strong>表情：</strong><br>
+                        🎉😊🚀💻
+                    </div>
+                    <div style="padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #20c997;">
+                        <strong>符号：</strong><br>
+                        !@#$%^&*()
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🔤 原文输入</h3>
+                <div class="input-group">
+                    <label for="originalText">请输入要加密的文本：</label>
+                    <textarea id="originalText" placeholder="支持中文、英文、数字、符号、表情等所有Unicode字符..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button class="btn-encrypt" onclick="encryptText()">🔒 加密</button>
+                    <button class="btn-clear" onclick="clearOriginal()">🗑️ 清空</button>
+                </div>
+                <div style="margin-top: 15px;">
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">快速测试：</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="quickTest('Hello World')" style="padding: 8px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.85rem;">英文测试</button>
+                        <button onclick="quickTest('123456')" style="padding: 8px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.85rem;">数字测试</button>
+                        <button onclick="quickTest('Hello你好123!')" style="padding: 8px 15px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.85rem;">混合测试</button>
+                        <button onclick="quickTest('🎉😊🚀')" style="padding: 8px 15px; background: #6f42c1; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.85rem;">表情测试</button>
+                    </div>
+                </div>
+                <div id="encryptResult" class="result" style="display: none;"></div>
+            </div>
+
+            <div class="section">
+                <h3>🔓 密文输入</h3>
+                <div class="input-group">
+                    <label for="encryptedText">请输入要解密的密文：</label>
+                    <textarea id="encryptedText" placeholder="在此输入密文字符..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button class="btn-decrypt" onclick="decryptText()">🔓 解密</button>
+                    <button class="btn-clear" onclick="clearEncrypted()">🗑️ 清空</button>
+                </div>
+                <div id="decryptResult" class="result" style="display: none;"></div>
+            </div>
+
+            <div id="messageArea"></div>
+        </div>
+    </div>
+
+    <script>
+        // 字符集定义
+        const CHAR_SET = '哈基米我那咩鲁拖啊西嘎呀库录';
+        const BASE = CHAR_SET.length; // 字符集长度作为进制基数
+
+        // 显示字符集
+        document.getElementById('charSet').textContent = CHAR_SET;
+
+        // 显示消息
+        function showMessage(message, type = 'success') {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `<div class="${type}">${message}</div>`;
+            messageArea.style.display = 'block';
+            setTimeout(() => {
+                messageArea.style.display = 'none';
+            }, 3000);
+        }
+
+        // 使用最简单的方法：直接处理字符串
+        function stringToBytes(str) {
+            // 将字符串转换为字符数组
+            return str.split('').map(char => char.charCodeAt(0));
+        }
+
+        // 将码点数组转换回字符串
+        function bytesToString(codes) {
+            return codes.map(code => String.fromCharCode(code)).join('');
+        }
+
+        // 将数字转换为指定进制的字符表示
+        function numberToBaseString(num, base) {
+            if (num === 0 || num === 0n) return CHAR_SET[0];
+            let result = '';
+            let bigNum = BigInt(num);
+            while (bigNum > 0n) {
+                result = CHAR_SET[Number(bigNum % BigInt(base))] + result;
+                bigNum = bigNum / BigInt(base);
+            }
+            return result;
+        }
+
+        // 将字符表示转换为数字
+        function baseStringToNumber(str, base) {
+            let result = BigInt(0);
+            for (let i = 0; i < str.length; i++) {
+                const charIndex = CHAR_SET.indexOf(str[i]);
+                if (charIndex === -1) {
+                    throw new Error(`无效字符: ${str[i]}`);
+                }
+                result = result * BigInt(base) + BigInt(charIndex);
+            }
+            return result;
+        }
+
+        // 加密函数
+        function encryptText() {
+            const originalText = document.getElementById('originalText').value.trim();
+            
+            if (!originalText) {
+                showMessage('请输入要加密的文本！', 'error');
+                return;
+            }
+
+            try {
+                // 转换为Unicode码点
+                const codes = stringToBytes(originalText);
+                
+                // 将码点数组转换为一个大数字
+                let bigNumber = BigInt(0);
+                for (let i = 0; i < codes.length; i++) {
+                    bigNumber = bigNumber * BigInt(65536) + BigInt(codes[i]);
+                }
+                
+                // 转换为自定义进制字符串
+                const encrypted = numberToBaseString(bigNumber, BASE);
+                
+                // 显示结果
+                const resultDiv = document.getElementById('encryptResult');
+                resultDiv.textContent = encrypted;
+                resultDiv.style.display = 'block';
+                
+                showMessage('加密成功！', 'success');
+                
+                // 自动复制到解密框
+                document.getElementById('encryptedText').value = encrypted;
+                
+            } catch (error) {
+                showMessage('加密失败：' + error.message, 'error');
+            }
+        }
+
+        // 解密函数
+        function decryptText() {
+            const encryptedText = document.getElementById('encryptedText').value.trim();
+            
+            if (!encryptedText) {
+                showMessage('请输入要解密的密文！', 'error');
+                return;
+            }
+
+            try {
+                // 验证字符集
+                for (let char of encryptedText) {
+                    if (!CHAR_SET.includes(char)) {
+                        throw new Error(`密文包含无效字符: ${char}`);
+                    }
+                }
+                
+                // 转换为大数字
+                const bigNumber = baseStringToNumber(encryptedText, BASE);
+                
+                // 转换回码点数组
+                const codes = [];
+                let num = bigNumber;
+                while (num > 0n) {
+                    codes.unshift(Number(num % BigInt(65536)));
+                    num = num / BigInt(65536);
+                }
+                
+                // 转换为字符串
+                const decrypted = bytesToString(codes);
+                
+                // 显示结果
+                const resultDiv = document.getElementById('decryptResult');
+                resultDiv.textContent = decrypted;
+                resultDiv.style.display = 'block';
+                
+                showMessage('解密成功！', 'success');
+                
+            } catch (error) {
+                showMessage('解密失败：' + error.message, 'error');
+            }
+        }
+
+        // 复制到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showMessage('已复制到剪贴板！', 'success');
+            }).catch(() => {
+                showMessage('复制失败！', 'error');
+            });
+        }
+
+        
+        // 快速测试函数
+        function quickTest(text) {
+            document.getElementById('originalText').value = text;
+            encryptText();
+        }
+
+        // 清空函数
+        function clearOriginal() {
+            document.getElementById('originalText').value = '';
+            document.getElementById('encryptResult').style.display = 'none';
+        }
+
+        function clearEncrypted() {
+            document.getElementById('encryptedText').value = '';
+            document.getElementById('decryptResult').style.display = 'none';
+        }
+
+        // 为结果区域添加点击复制功能
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('result')) {
+                copyToClipboard(e.target.textContent);
+            }
+        });
+
+        // 添加回车键快捷操作
+        document.getElementById('originalText').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                encryptText();
+            }
+        });
+
+        document.getElementById('encryptedText').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                decryptText();
+            }
+        });
+
+        // 测试功能
+        function testEncryption() {
+            const testCases = [
+                '你好哈喽',
+                'Hello World',
+                '123456',
+                'Hello你好123',
+                'Special!@#$%^&*()',
+                '测试Test123!@#',
+                '🎉😊🚀',
+                'a'.repeat(100) // 长文本测试
+            ];
+            
+            console.log('=== 开始批量测试 ===');
+            
+            for (let i = 0; i < testCases.length; i++) {
+                const testText = testCases[i];
+                console.log(`\n--- 测试用例 ${i + 1}: "${testText}" ---`);
+                
+                try {
+                    // 加密测试
+                    const codes = stringToBytes(testText);
+                    console.log('Unicode码点:', codes);
+                    
+                    let bigNumber = BigInt(0);
+                    for (let j = 0; j < codes.length; j++) {
+                        bigNumber = bigNumber * BigInt(65536) + BigInt(codes[j]);
+                    }
+                    
+                    const encrypted = numberToBaseString(bigNumber, BASE);
+                    console.log('加密结果:', encrypted);
+                    
+                    // 解密测试
+                    const decryptedNumber = baseStringToNumber(encrypted, BASE);
+                    const decryptedCodes = [];
+                    let num = decryptedNumber;
+                    while (num > 0n) {
+                        decryptedCodes.unshift(Number(num % BigInt(65536)));
+                        num = num / BigInt(65536);
+                    }
+                    
+                    const decryptedText = bytesToString(decryptedCodes);
+                    const success = testText === decryptedText;
+                    
+                    console.log('解密文本:', decryptedText);
+                    console.log('测试结果:', success ? '✅ 成功' : '❌ 失败');
+                    
+                    if (!success) {
+                        console.error(`❌ 测试失败: "${testText}" -> "${decryptedText}"`);
+                    }
+                } catch (error) {
+                    console.error(`❌ 测试异常:`, error.message);
+                }
+            }
+            
+            console.log('\n=== 批量测试完成 ===');
+            
+            // 单独测试原始用例
+            const testText = '你好哈喽';
+            
+            // 加密测试
+            const codes = stringToBytes(testText);
+            console.log('Unicode码点:', codes);
+            console.log('每个字符的码点:');
+            for (let i = 0; i < testText.length; i++) {
+                console.log(`  ${testText[i]} = ${codes[i]}`);
+            }
+            
+            let bigNumber = BigInt(0);
+            for (let i = 0; i < codes.length; i++) {
+                bigNumber = bigNumber * BigInt(65536) + BigInt(codes[i]);
+            }
+            console.log('大数字:', bigNumber.toString());
+            
+            const encrypted = numberToBaseString(bigNumber, BASE);
+            console.log('加密结果:', encrypted);
+            
+            // 解密测试
+            const decryptedNumber = baseStringToNumber(encrypted, BASE);
+            console.log('解密数字:', decryptedNumber.toString());
+            console.log('数字是否相等:', bigNumber.toString() === decryptedNumber.toString());
+            
+            const decryptedCodes = [];
+            let num = decryptedNumber;
+            while (num > 0n) {
+                decryptedCodes.unshift(Number(num % BigInt(65536)));
+                num = num / BigInt(65536);
+            }
+            console.log('解密码点:', decryptedCodes);
+            console.log('码点是否相等:', JSON.stringify(codes) === JSON.stringify(decryptedCodes));
+            
+            const decryptedText = bytesToString(decryptedCodes);
+            console.log('解密文本:', decryptedText);
+            
+            // 逐字符比较
+            console.log('逐字符比较:');
+            for (let i = 0; i < Math.max(testText.length, decryptedText.length); i++) {
+                const original = testText[i] || '(空)';
+                const decrypted = decryptedText[i] || '(空)';
+                const match = original === decrypted ? '✓' : '✗';
+                console.log(`  位置${i}: "${original}" vs "${decrypted}" ${match}`);
+            }
+            
+            console.log('测试结果:', testText === decryptedText ? '成功' : '失败');
+            
+            return { testText, encrypted, decryptedText, success: testText === decryptedText };
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            showMessage('欢迎使用哈基米加密解密工具！', 'success');
+            
+            // 自动测试
+            const testResult = testEncryption();
+            if (testResult.success) {
+                console.log('✅ 加密解密测试通过');
+            } else {
+                console.error('❌ 加密解密测试失败');
+                console.log('原始:', testResult.testText);
+                console.log('解密:', testResult.decryptedText);
+            }
+        });
+    </script>
+</body>
+</html>

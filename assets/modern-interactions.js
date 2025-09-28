@@ -145,9 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // 初始化主题
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', savedTheme);
   
   // 阅读进度指示器
   const readingProgress = document.createElement('div');

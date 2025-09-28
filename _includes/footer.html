@@ -28,8 +28,7 @@
           <h3 class="footer-section-title">🔗 快速链接</h3>
           <ul class="footer-nav">
             <li><a href="{{ "/" | relative_url }}">首页</a></li>
-            <li><a href="{{ "/about" | relative_url }}">关于我</a></li>
-            <li><a href="{{ "/calculator" | relative_url }}">计算器</a></li>
+            <li><a href="{{ "/tools" | relative_url }}">工具</a></li>
             <li><a href="{{ "/feed.xml" | relative_url }}">RSS 订阅</a></li>
           </ul>
         </div>
@@ -57,7 +56,7 @@
 
     <div class="footer-bottom">
       <div class="footer-copyright">
-        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author | default: site.title }}. 保留所有权利。</p>
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author | default: site.title }}. 保留所有权利。 | <a href="{{ "/about" | relative_url }}" class="footer-about-link">关于</a></p>
         <p class="footer-powered">由 <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> 驱动，托管于 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a></p>
       </div>
     </div>

@@ -35,7 +35,10 @@
       (function() {
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'night') {
-          document.documentElement.classList.add('night-mode'); 
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.body.classList.add('night-mode'); 
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
         }
       })();
     </script>

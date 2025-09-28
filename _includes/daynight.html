@@ -5,14 +5,14 @@
       const themeSwitch = document.getElementById("theme-switch");
       const body = document.body;      
       
-      // 检查本地存储中的主题设置
+      // 检查本地存储中的主题设置并同步开关状态
       const currentTheme = localStorage.getItem('theme');
-      if (currentTheme === 'night') {
-        body.classList.add('night-mode');
-        themeSwitch.checked = true;
-        document.documentElement.setAttribute('data-theme', 'dark');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'light');
+      if (themeSwitch) {
+        if (currentTheme === 'night') {
+          themeSwitch.checked = true;
+        } else {
+          themeSwitch.checked = false;
+        }
       }
   
       // 页面加载后添加 transition 类，恢复过渡动画
